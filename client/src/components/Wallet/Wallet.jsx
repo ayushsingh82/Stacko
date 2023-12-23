@@ -12,7 +12,7 @@ const Wallet=()=>{
 
     const [isLoading,setIsLoading]=useState(false);
 
-    const handleWalllet=async=>{
+    const handleWalllet=async()=>{
         try{
           setIsLoading(true);
           const {provider,account,stakingContract,stakeTokenContract,chainId}=await ConnectWallet();
