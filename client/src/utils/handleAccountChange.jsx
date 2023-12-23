@@ -3,6 +3,6 @@ export const handleAccountChange=async(setState)=>{
     method:"eth_requestAccounts"
    })
    const selectedAccount=accounts[0]
-   console.log(selectedAccount)
+//    console.log(selectedAccount)
    setState(prevState=>({...prevState,selectedAccount}))
 }

@@ -1,5 +1,5 @@
-import ConnectedAccount from "./ConnectedAccount"
-import ConnectedNetwork from "./ConnectedNetwork"
+import ConnectedAccount from "./ConnectedAccount";
+import ConnectedNetwork from "./ConnectedNetwork";
 
 const Navigation=()=>{
     return (
