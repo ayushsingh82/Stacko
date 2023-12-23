@@ -1,4 +1,4 @@
-
+import Web3Context from "../../context/Web3Context";
 import { useState,useEffect } from "react";
 import  connectWallet  from "../../utils/connectWallet";
 
@@ -17,7 +17,7 @@ const Wallet=()=>{
         try{
           setIsLoading(true);
           const {provider,selectedAccount,stakingContract,stakeTokenContract,chainId}=await connectWallet();
-          console.log(provider,selectedAccount,stakingContract,stakeTokenContract,chainId)
+          console.log("Provider:" ,provider,"SelectedAccount:",selectedAccount,"stakingContract:",stakingContract,"stakeTokenContract:",stakeTokenContract,"chainId:",chainId)
           setState({provider,selectedAccount,stakingContract,stakeTokenContract,chainId})
         }catch(error){
            console.error("Error while connecting wallet :",error.message)
@@ -25,7 +25,15 @@ const Wallet=()=>{
             setIsLoading(false)
         }
     }
-    return <button onClick={handleWallet}>Connect Wallet</button>
+    return (
+        <div>
+        <Web3Context.Provider value={state}>
+            {children}
+        </Web3Context.Provider>
+        {isLoading && <p>Loading...</p>}
+          <button onClick={handleWallet}>Connect Wallet</button>
+        </div>
+    )
 }
 
 export default Wallet;
