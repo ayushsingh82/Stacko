@@ -27,7 +27,7 @@ const EarnedReward=()=>{
   
     return(
       <div className="earned-reward">
-        <p>Earned Reward:</p>
+        <p>Earned Reward:{rewardVal}</p>
         <span>{rewardVal}</span>
     </div>
     )

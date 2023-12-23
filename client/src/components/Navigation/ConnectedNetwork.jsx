@@ -6,7 +6,7 @@ const ConnectedNetwork=()=>{
      if(chainId===11155111){
         return <p>Connected Network : Sepolia</p>
      }else{
-        return <p>Connected Network : Unsupported</p>
+        return <p>Connected Network : You are not Connected</p>
      }
 
 }
