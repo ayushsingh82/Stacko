@@ -9,14 +9,21 @@ const StakedAmount=()=>{
     useEffect(()=>{
         const fetchStakedBalance=async()=>{
             try{
-              const amountStaked=await stakingContract.stakedBalance(selectedAccount)
-              console.log(amountStaked)
+              const amountStakedWei=await stakingContract.stakedBalance(selectedAccount)
+              const amountStakedEth=ethers.formatUnits(amountStakedWei.toString(),18)
+              setStakedAmount(amountStakedEth)
             }catch(error){
                 console.log("Error fetching data",error.message)
             }
         }
         stakingContract && fetchStakedBalance()
     },[stakingContract,selectedAccount])
+
+    return (
+        <p>
+            StakedAmount:{stakedAmount}
+        </p>
+    )
 }
 
 export default StakedAmount
