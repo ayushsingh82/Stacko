@@ -3,12 +3,12 @@ import {ethers} from "ethers"
 import Web3Context from "../../context/Web3Context";
 import StakingContext from "../../context/StakingContext";
 import Button from "../Button/Button";
-
+import { toast } from "react-hot-toast";
 
 
 const WithdrawStakeAmount =()=>{
  const {stakingContract}=useContext(Web3Context);
- const {isReload,setIsReload}=useContext(StakingContext)
+//  const {isReload,setIsReload}=useContext(StakingContext)
  const withdrawStakeAmountRef = useRef();
 
 
@@ -40,7 +40,7 @@ const WithdrawStakeAmount =()=>{
     //       toast.error("Transaction failed. Please try again.")
     //   }
     } catch (error) {
-    
+      toast.error("Staking Failed");
       console.error(error.message)
     }
   };

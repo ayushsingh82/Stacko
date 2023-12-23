@@ -1,12 +1,14 @@
-import { useState,useEffect,useContext,useRef } from "react"
-import Button from "../Button/Button"
+import { useContext,useRef } from "react";
 import {ethers} from "ethers"
-import Web3Context from "../../context/Web3Context"
+import Web3Context from "../../context/Web3Context";
+import Button from "../Button/Button";
+import StakingContext from "../../context/StakingContext";
+import { toast } from "react-hot-toast";
 
 
-const StakeAmount=()=>{
-    const {stakingContract}=useContext(Web3Context);
- const {isReload,setIsReload}=useContext(Web3Context)
+const StakeAmount =()=>{
+ const {stakingContract}=useContext(Web3Context);
+//  const {isReload,setIsReload}=useContext(StakingContext)
  const stakeAmountRef = useRef();
 
  const stakeToken=async(e)=>{
@@ -35,7 +37,8 @@ const StakeAmount=()=>{
     //       toast.error("Transaction failed. Please try again.")
     //   }
     } catch (error) {
-      console.error("Token Valid Amount ",error.message);
+      toast.error("Staking Failed");
+      console.error(error.message)
     }
   };
     return (
@@ -46,5 +49,4 @@ const StakeAmount=()=>{
       </form>
        )
 }
-
-export default StakeAmount
+export default StakeAmount;
