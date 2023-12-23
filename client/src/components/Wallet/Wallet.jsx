@@ -1,8 +1,9 @@
 import Web3Context from "../../context/Web3Context";
 import { useState,useEffect } from "react";
 import  connectWallet  from "../../utils/connectWallet";
+import Button from "../Button/Button";
 
-const Wallet=()=>{
+const Wallet=({children})=>{
     const [state,setState]=useState({
         provider:null,
         account:null,
@@ -27,11 +28,9 @@ const Wallet=()=>{
     }
     return (
         <div>
-        <Web3Context.Provider value={state}>
-            {children}
-        </Web3Context.Provider>
+        <Web3Context.Provider value={state}>{children}</Web3Context.Provider>
         {isLoading && <p>Loading...</p>}
-          <button onClick={handleWallet}>Connect Wallet</button>
+          <Button onClick={handleWallet} label="Connect Wallet"/>
         </div>
     )
 }
