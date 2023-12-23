@@ -3,7 +3,8 @@ import Button from "../Button/Button"
 import {ethers} from "ethers"
 import Web3Context from "../../context/Web3Context"
 
-const StakedAmount=()=>{
+
+const StakeAmount=()=>{
     const {stakingContract}=useContext(Web3Context);
  const {isReload,setIsReload}=useContext(Web3Context)
  const stakeAmountRef = useRef();
@@ -34,8 +35,7 @@ const StakedAmount=()=>{
     //       toast.error("Transaction failed. Please try again.")
     //   }
     } catch (error) {
-      toast.error("Staking Failed");
-      console.error(error.message)
+      console.error("Token Valid Amount ",error.message);
     }
   };
     return (
@@ -47,4 +47,4 @@ const StakedAmount=()=>{
        )
 }
 
-export default StakedAmount
+export default StakeAmount
