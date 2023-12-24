@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 
 const StakeAmount =()=>{
  const {stakingContract}=useContext(Web3Context);
-//  const {isReload,setIsReload}=useContext(StakingContext)
+ const {isReload,setIsReload}=useContext(StakingContext)
  const stakeAmountRef = useRef();
 
  const stakeToken=async(e)=>{
@@ -30,12 +30,12 @@ const StakeAmount =()=>{
     });
     stakeAmountRef.current.value = "";
     setIsReload(!isReload);
-    // if (receipt.status === 1) {
-    //     setIsReload(!isReload);
-    //     stakeAmountRef.current.value = "";
-    //   } else {
-    //       toast.error("Transaction failed. Please try again.")
-    //   }
+    if (receipt.status === 1) {
+        setIsReload(!isReload);
+        stakeAmountRef.current.value = "";
+      } else {
+          toast.error("Transaction failed. Please try again.")
+      }
     } catch (error) {
       toast.error("Staking Failed");
       console.error(error.message)

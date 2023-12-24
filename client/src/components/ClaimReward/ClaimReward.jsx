@@ -1,11 +1,11 @@
 import { useContext} from "react";
-import web3Context from "../../context/Web3Context"
+import Web3Context from "../../context/Web3Context"
 import Button from "../Button/Button";
 import { toast } from "react-hot-toast";
 // import "./ClaimReward.css"
 
 const ClaimReward = ()=>{
- const {stakingContract}=useContext(web3Context);
+ const {stakingContract}=useContext(Web3Context);
  const claimReward = async()=>{
   try{
     const transaction = await stakingContract.getReward();
@@ -15,14 +15,14 @@ const ClaimReward = ()=>{
       success: 'Transaction successful 👌',
       error: 'Transaction failed 🤯'
     });
-    // if(receipt.status === 1){
-    //     setTransactionStatus("Transaction Is Successful")
-    //     setTimeout(()=>{
-    //       setTransactionStatus("")
-    //     },5000) 
-    //   } else{
-    //     setTransactionStatus("Transaction failed. Please try again.");
-    //   }
+    if(receipt.status === 1){
+        setTransactionStatus("Transaction Is Successful")
+        setTimeout(()=>{
+          setTransactionStatus("")
+        },5000) 
+      } else{
+        setTransactionStatus("Transaction failed. Please try again.");
+      }
   }catch(error){
     console.error("Claim Reward Failed",error.message)
   }
