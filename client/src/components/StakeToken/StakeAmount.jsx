@@ -4,6 +4,7 @@ import Web3Context from "../../context/Web3Context";
 import Button from "../Button/Button";
 import StakingContext from "../../context/StakingContext";
 import { toast } from "react-hot-toast";
+import "./StakeToken.css";
 
 
 const StakeAmount =()=>{
