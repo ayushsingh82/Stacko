@@ -1,15 +1,14 @@
-import EarnedReward from "./EarnedReward"
-import RewardRate from "./RewardRate"
-import StakedAmount from "./StakedAmount"
+import RewardRate from "./RewardRate";
+import StakedAmount from "./StakedAmount";
+import EarnedReward from "./EarnedReward";
 
-const DisplayPannel=()=>{
-  return (
-    <div>
-        <StakedAmount/>
-        <EarnedReward/>
-        <RewardRate/>
-    </div>
+const DisplayPannel = ()=>{
+  return(   
+  <div className="top-wrapper">
+    <StakedAmount/>
+    <RewardRate/>
+    <EarnedReward/>
+  </div>
   )
 }
-
-export default DisplayPannel
+export default DisplayPannel;
