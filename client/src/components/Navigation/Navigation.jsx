@@ -1,7 +1,7 @@
 import ConnectedAccount from "./ConnectedAccount";
 import ConnectedNetwork from "./ConnectedNetwork";
 import ClaimReward from "../ClaimReward/ClaimReward";
-// import "./Navigation.css"
+import "./Navigation.css"
 const Navigation = ()=>{
   return(
     <header className="navbar">
