@@ -1,51 +1,49 @@
-import { useState,useEffect,useContext,useRef } from "react"
-import Button from "../Button/Button"
+import { useContext,useRef } from "react";
 import {ethers} from "ethers"
-import Web3Context from "../../context/Web3Context"
-
-const TokenApproval=()=>{
-    const {stakeTokenContract,stakingContract,provider}=useContext(Web3Context);
-    const approveTokenRef=useRef();
-    const [transactionStatus,setTransactionStatus]=useState("")
+import Web3Context from "../../context/Web3Context";
+import Button from "../Button/Button";
+import { toast } from "react-hot-toast";
+const TokenApproval =()=>{
+ const {stakeTokenContract,stakingContract}=useContext(Web3Context);
+ const approvedTokenRef = useRef();
 
  const approveToken=async(e)=>{
-    e.preventDefault();
-    const amount=approveTokenRef.current.value.trim();
-
-    if(isNaN(amount) || amount<=0){
-        console.error("Please enter valid number");
-        return ;
+   e.preventDefault();
+   const amount = approvedTokenRef.current.value.trim();
+   if(isNaN(amount) || amount<=0){
+    console.error("Please enter a valid positive number");
+    return;
+   }
+   const amountToSend = ethers.parseUnits(amount,18).toString();
+   try{
+    const transaction = await stakeTokenContract.approve(stakingContract.target,amountToSend)
+    await toast.promise(transaction.wait(),
+    {
+      loading: "Transaction is pending...",
+      success: 'Transaction successful 👌',
+      error: 'Transaction failed 🤯'
+    });
+    approvedTokenRef.current.value = "";
+    // const receipt = await transaction.wait();
+    // if (receipt.status === 1) {
+    //     toast.success("Transaction is successful")
+    //     approvedTokenRef.current.value = "";
+    //   } else {
+    //       toast.error("Transaction failed. Please try again.")
+    //   }
+    } catch (error) {
+      toast.error("Token Approval Failed");
+      console.error(error.message)
     }
-    const amountToSend=ethers.parseUnits(amount,18).toString();
-    try{
-      const transaction=await stakeTokenContract.approve(stakingContract.target,amountToSend);
-      setTransactionStatus("Transaction is pending...")
-      // const transObj=await provider.getTransaction(transaction.hash)
-      const receipt=await transaction.wait();
-      if(receipt.status===1){
-        setTransactionStatus("Transaction is successful");
-        setTimeout(()=>{
-            setTransactionStatus("")
-        },5000)
-        approveTokenRef.current.value=""
-      }else{
-        setTransactionStatus("Transaction Failed")
-      }
-    }catch(error){
-        console.error("Token Approval Failed",error.message);
-    }
- }
-
-    return(
-        <div>
-        {transactionStatus && <div>{transactionStatus}</div>}
-            <form onSubmit={approveToken}>
-              <label>Token Approval:</label>  
-              <input type="text" ref={approveTokenRef} />
-              <Button onClick={approveToken} type="submit" label="Token Approve"/>
-            </form>
-        </div>
-    )
+  };
+ return (
+  <div>
+     <form onSubmit={approveToken} className="token-amount-form">
+        <label className="token-input-label">Token Approval:</label>
+        <input type="text" ref={approvedTokenRef} />
+        <Button onClick={approveToken} type="submit" label="Token Approval" />
+      </form>
+ </div>
+ )
 }
-
-export default TokenApproval
+export default TokenApproval;
