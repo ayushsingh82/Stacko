@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { connectWallet } from "../../utils/connectWallet";
+import  ConnectWallet  from "../../utils/ConnectWallet";
 import Web3Context from "../../context/Web3Context";
 import Button from "../Button/Button";
 import { handleAccountChange } from "../../utils/handleAccountChange";
@@ -29,7 +29,7 @@ const Wallet =({children})=>{
  const handleWallet = async()=>{
     try{
         setIsLoading(true);
-        const { provider,selectedAccount,stakingContract,stakeTokenContract,chainId} = await connectWallet();
+        const { provider,selectedAccount,stakingContract,stakeTokenContract,chainId} = await ConnectWallet();
         setState({provider,selectedAccount,stakingContract,stakeTokenContract,chainId})
 
     }catch(error){

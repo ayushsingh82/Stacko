@@ -3,7 +3,7 @@ import stakingAbi from "../ABI/stakingAbi.json"
 import stakeTokenAbi from "../ABI/stakeTokenAbi.json";
 
 
- const connectWallet = async()=>{
+ const ConnectWallet = async()=>{
     try{
        let [signer,provider,stakingContract,stakeTokenContract,chainId]=[null,null,null,null,null];
        if(window.ethereum===null){
@@ -43,4 +43,4 @@ import stakeTokenAbi from "../ABI/stakeTokenAbi.json";
     
 }
 
-export default connectWallet
+export default ConnectWallet
